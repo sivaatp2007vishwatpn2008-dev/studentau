@@ -173,7 +173,10 @@ elif task=="Get Aim":
         if targ>100:
             st.success(f" {name} , It's impossible! But you get better 🌟")
             st.success("Try Again With less Target !!")
+            st.success("Atleast you need 50+ to Pass 🍀")
             st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
         else:
             st.success(f" {name} , You Need (End Semester): {targ} 📈")
+            st.success("Atleast you need 50+ to Pass 🍀")
             st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
+
