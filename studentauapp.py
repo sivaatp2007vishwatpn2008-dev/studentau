@@ -3,6 +3,21 @@ import streamlit as st
 # ---------------------------
 # Functions
 # ---------------------------
+def convert_aim(aim):
+    if aim=='o':
+        return 90
+    elif aim=='a+':
+        return 80
+    elif aim=='a':
+        return 70
+    elif aim=='b+':
+        return 60
+    elif aim=='b':
+        return 50
+    elif aim=='c':
+        return 45
+    else:
+        print("Invalid Input")
 def getaim(int,aim):
     y=aim-int
     x=y/0.6
@@ -61,17 +76,17 @@ st.set_page_config(page_title="🎓 Student Helper App", page_icon="📘", layou
 st.markdown("<h1 style='text-align:center; color:#2E86C1;'>🎓 Student Helper App</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align:center;'>Your academic companion to calculate internal marks, attendance, and future grades!</p>", unsafe_allow_html=True)
 
-name = st.text_input("👤 Enter your Name")
+name = st.text_input("👤 Enter your Name").capitalize()
 
 task = st.selectbox(
     "📌 Choose a Task",
-    ["-- Select --", "Calculate Academic Level", "Future Grade Prediction", "Calculate Attendance Percentage", "Calculate Internal Marks","Get Aim"]
+    ["-- Select -- 👇🏻", "Calculate Academic Level 🏅", "Future Grade Prediction 🔮", "Calculate Attendance Percentage 📅", "Calculate Internal Marks 🎯","Achieve Target 🚀"]
 )
 
 st.markdown("---")
 
 # Task: Academic Level
-if task == "Calculate Academic Level":
+if task == "Calculate Academic Level 🏅":
     st.subheader("📊 Academic Level Calculator")
     col1, col2 = st.columns(2)
     with col1:
@@ -90,7 +105,7 @@ if task == "Calculate Academic Level":
         st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
 
 # Task: Grade Prediction
-elif task == "Future Grade Prediction":
+elif task == "Future Grade Prediction 🔮":
     st.subheader("🔮 Future Grade Predictor")
     method = st.radio("Do you know your Academic Level?", ["Yes", "No"])
 
@@ -98,12 +113,12 @@ elif task == "Future Grade Prediction":
         g = st.number_input("Enter your Academic Level", min_value=0, max_value=100)
         st.markdown("### 🧪 Coaching Class Marks")
         add = []
-        for i in range(1, 5):
+        for i in range(1, 3):
             coach = st.number_input(f"Phase {i} Coaching Marks /100", min_value=0, max_value=100, key=f"coach_{i}")
             add.append(coach)
 
-        if st.button("🎯 Predict Grade"):
-            avg_coach = round(sum(add) / 4)
+        if st.button("🔍 Predict Grade"):
+            avg_coach = round(sum(add) / 2)
             final_level = round((g + avg_coach) / 2)
             st.info(grade(final_level))
             st.success(f"All the best, {name}! 🍀")
@@ -124,20 +139,20 @@ elif task == "Future Grade Prediction":
 
         st.markdown("### 🧪 Coaching Class Marks")
         add = []
-        for i in range(1, 5):
+        for i in range(1, 3):
             coach = st.number_input(f"Phase {i} Coaching Marks /100", min_value=0, max_value=100, key=f"coachn_{i}")
             add.append(coach)
 
         if st.button("🔍 Predict Grade"):
             academic_level = calc_academic_level(p, q, r, s, present, total)
-            avg_coach = round(sum(add) / 4)
+            avg_coach = round(sum(add) / 2)
             final_level = round((academic_level + avg_coach) / 2)
             st.info(grade(final_level))
             st.success(f"All the best, {name}! 🌟")
             st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
 
 # Task: Attendance
-elif task == "Calculate Attendance Percentage":
+elif task == "Calculate Attendance Percentage 📅":
     st.subheader("📅 Attendance Percentage Calculator")
     present = st.number_input("Number of Classes Attended", min_value=0)
     total = st.number_input("Total Number of Classes", min_value=0)
@@ -148,7 +163,7 @@ elif task == "Calculate Attendance Percentage":
         st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
 
 # Task: Internal Marks
-elif task == "Calculate Internal Marks":
+elif task == "Calculate Internal Marks 🎯":
     st.subheader("📝 Internal Marks Calculator")
     col1, col2 = st.columns(2)
     with col1:
@@ -164,19 +179,17 @@ elif task == "Calculate Internal Marks":
         st.info(f"📗 Model Internal Marks (/20): {int2}")
         st.success(f"📙 Total Internal Marks (for End Semester): {total_int}")
         st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
-elif task=="Get Aim":
+elif task=="Achieve Target 🚀":
     st.subheader("🎯 Achieve Your Grade")
     internal=st.number_input("End semester Internal Marks",min_value=0,max_value=40)
-    aim=st.number_input("Target Mark",min_value=0,max_value=90)
-    if st.button("Calculate Need Marks"):
+    aims=st.text_input("Target Grade").lower()
+    aim=convert_aim(aims)
+    if st.button("Calculate Need Marks ✅"):
         targ=round(getaim(internal,aim))
         if targ>100:
             st.success(f" {name} , It's impossible! But you get better 🌟")
             st.success("Try Again With less Target !!")
-            st.success("Atleast you need 50+ to Pass 🍀")
             st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
         else:
             st.success(f" {name} , You Need (End Semester): {targ} 📈")
-            st.success("Atleast you need 50+ to Pass 🍀")
             st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
-
