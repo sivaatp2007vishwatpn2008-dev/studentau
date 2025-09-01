@@ -17,7 +17,7 @@ def convert_aim(aim):
     elif aim=='c':
         return 45
     else:
-        print("Invalid Input")
+        return "Invalid Input"
 def getaim(int,aim):
     y=aim-int
     x=y/0.6
@@ -182,7 +182,7 @@ elif task == "Calculate Internal Marks 🎯":
 elif task=="Achieve Target 🚀":
     st.subheader("🎯 Achieve Your Grade")
     internal=st.number_input("End semester Internal Marks",min_value=0,max_value=40)
-    aims=st.text_input("Target Grade").lower()
+    aims=st.selectbox("Choose Grade 👇🏻",['O','A+','A','B+','B','C']).lower()
     aim=convert_aim(aims)
     if st.button("Calculate Need Marks ✅"):
         targ=round(getaim(internal,aim))
@@ -190,6 +190,11 @@ elif task=="Achieve Target 🚀":
             st.success(f" {name} , It's impossible! But you get better 🌟")
             st.success("Try Again With less Target !!")
             st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
-        else:
+        elif targ>=45:
             st.success(f" {name} , You Need (End Semester): {targ} 📈")
             st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
+        elif targ<45:
+            st.success(f" {name}, You Need (End semester): {targ} 📈")
+            st.success("According  to rules, YOU Must Want 45+ to PASS 🍀")
+            st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
+
