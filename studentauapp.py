@@ -76,6 +76,7 @@ st.set_page_config(page_title="🎓 Student Helper App", page_icon="📘", layou
 
 st.markdown("<h1 style='text-align:center; color:#1E90FF;'>🎓 Student Helper App</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align:center;'>Your academic companion to calculate internal marks, attendance, and future grades!</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center;'>( Turn Mobile For Better Experience )</p>", unsafe_allow_html=True)
 
 name = st.text_input("👤 Enter your Name").capitalize()
 
@@ -213,6 +214,7 @@ page_bg = f"""
 """
 
 st.markdown(page_bg, unsafe_allow_html=True)
+
 
 
 
