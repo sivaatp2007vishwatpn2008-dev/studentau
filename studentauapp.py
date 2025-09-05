@@ -28,11 +28,11 @@ def grade(a):
     elif 80 <= a < 90:
         return " Your Predicted Grade: A+ or A 🥳"
     elif 70 <= a < 80:
-        return " Your Predicted Grade: A or B+ 👍"
+        return " Your Predicted Grade: A or B+ 🎉"
     elif 60 <= a < 70:
-        return " Your Predicted Grade: B+ or B 🙂"
+        return " Your Predicted Grade: B+ or B 🥳"
     elif 50 <= a < 60:
-        return " Your Predicted Grade: B or C 😐"
+        return " Your Predicted Grade: B or C 🙂"
     elif a < 50:
         return "⚠️ Your Predicted Grade: U (Needs Improvement)"
     else:
@@ -74,7 +74,7 @@ def calc_internal_marks(p, q, r, s):
 
 st.set_page_config(page_title="🎓 Student Helper App", page_icon="📘", layout="centered")
 
-st.markdown("<h1 style='text-align:center; color:#2E86C1;'>🎓 Student Helper App</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align:center; color:#1E90FF;'>🎓 Student Helper App</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align:center;'>Your academic companion to calculate internal marks, attendance, and future grades!</p>", unsafe_allow_html=True)
 
 name = st.text_input("👤 Enter your Name").capitalize()
@@ -103,7 +103,7 @@ if task == "Calculate Academic Level 🏅":
     if st.button("✅ Calculate Academic Level"):
         academic_level = calc_academic_level(p, q, r, s, present, total)
         st.success(f"🎯 {name}, Your Academic Level is: {academic_level}%")
-        st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='color:#00FFFF;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
 
 # Task: Grade Prediction
 elif task == "Future Grade Prediction 🔮":
@@ -122,8 +122,8 @@ elif task == "Future Grade Prediction 🔮":
             avg_coach = round(sum(add) / 2)
             final_level = round((g + avg_coach) / 2)
             st.info(grade(final_level))
-            st.success(f"All the best, {name}! 🍀")
-            st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
+            st.success(f"All the best, {name}! 💐")
+            st.markdown("<h4 style='color:#00FFFF;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
 
     elif method == "No":
         st.markdown("### 📄 Enter Internal & Attendance Details")
@@ -150,7 +150,7 @@ elif task == "Future Grade Prediction 🔮":
             final_level = round((academic_level + avg_coach) / 2)
             st.info(grade(final_level))
             st.success(f"All the best, {name}! 🌟")
-            st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
+            st.markdown("<h4 style='color:#00FFFF;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
 
 # Task: Attendance
 elif task == "Calculate Attendance Percentage 📅":
@@ -161,7 +161,7 @@ elif task == "Calculate Attendance Percentage 📅":
     if st.button("📈 Calculate Attendance"):
         att_per = calc_attendance_percentage(present, total)
         st.success(f"{name}, Your Attendance Percentage is: {att_per}% 🎯")
-        st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='color:#00FFFF;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
 
 # Task: Internal Marks
 elif task == "Calculate Internal Marks 🎯":
@@ -179,7 +179,7 @@ elif task == "Calculate Internal Marks 🎯":
         st.info(f"📘 IAT Internal Marks (/20): {int1}")
         st.info(f"📗 Model Internal Marks (/20): {int2}")
         st.success(f"📙 Total Internal Marks (for End Semester): {total_int}")
-        st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
+        st.markdown("<h4 style='color:#00FFFF;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
 elif task=="Achieve Target 🚀":
     st.subheader("🎯 Achieve Your Grade")
     internal=st.number_input("End semester Internal Marks",min_value=0,max_value=40)
@@ -190,31 +190,33 @@ elif task=="Achieve Target 🚀":
         if targ>100:
             st.success(f" {name} , It's impossible! But you get better 🌟")
             st.success("Try Again With less Target !!")
-            st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
+            st.markdown("<h4 style='color:#00FFFF;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
         elif targ>=45:
             st.success(f" {name} , You Need (End Semester): {targ} 📈")
-            st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
+            st.markdown("<h4 style='color:#00FFFF;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
         elif targ<45:
             st.success(f" {name}, You Need (End semester): {targ} 📈")
             st.success("According  to rules, YOU Must Want 45+ to PASS 🍀")
-            st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
+            st.markdown("<h4 style='color:#00FFFF;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
 
 
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-image: url("https://picsum.photos/1200/800");
-        background-attachment: fixed;
-        background-size: cover;
-        background-repeat: no-repeat;
-        height: 100%;
-        margin: 0;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# Background image set panna
+page_bg = f"""
+<style>
+[data-testid="stAppViewContainer"] {{
+    background-image: url("https://png.pngtree.com/background/20210714/original/pngtree-hand-drawn-lineart-education-blackboard-school-supplies-background-picture-image_1220253.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}}
+</style>
+"""
+
+st.markdown(page_bg, unsafe_allow_html=True)
+
+
+
+
 
 
 
