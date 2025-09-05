@@ -24,15 +24,15 @@ def getaim(int,aim):
     return x
 def grade(a):
     if 90 <= a <= 100:
-        return "🎉 Your Predicted Grade: A+ or O"
+        return " Your Predicted Grade: O or A+ 🎉"
     elif 80 <= a < 90:
-        return "🥳 Your Predicted Grade: A or A+"
+        return " Your Predicted Grade: A+ or A 🥳"
     elif 70 <= a < 80:
-        return "👍 Your Predicted Grade: B+ or A"
+        return " Your Predicted Grade: A or B+ 👍"
     elif 60 <= a < 70:
-        return "🙂 Your Predicted Grade: B or B+"
+        return " Your Predicted Grade: B+ or B 🙂"
     elif 50 <= a < 60:
-        return "😐 Your Predicted Grade: C or B"
+        return " Your Predicted Grade: B or C 😐"
     elif a < 50:
         return "⚠️ Your Predicted Grade: U (Needs Improvement)"
     else:
@@ -71,6 +71,7 @@ def calc_internal_marks(p, q, r, s):
 # ---------------------------
 # Streamlit UI
 # ---------------------------
+
 st.set_page_config(page_title="🎓 Student Helper App", page_icon="📘", layout="centered")
 
 st.markdown("<h1 style='text-align:center; color:#2E86C1;'>🎓 Student Helper App</h1>", unsafe_allow_html=True)
@@ -80,7 +81,7 @@ name = st.text_input("👤 Enter your Name").capitalize()
 
 task = st.selectbox(
     "📌 Choose a Task",
-    ["-- Select -- 👇🏻", "Calculate Academic Level 🏅", "Future Grade Prediction 🔮", "Calculate Attendance Percentage 📅", "Calculate Internal Marks 🎯","Achieve Target 🚀"]
+    ["-- Tap To Select -- 👇🏻", "Calculate Academic Level 🏅", "Future Grade Prediction 🔮", "Calculate Attendance Percentage 📅", "Calculate Internal Marks 🎯","Achieve Target 🚀"]
 )
 
 st.markdown("---")
@@ -197,4 +198,23 @@ elif task=="Achieve Target 🚀":
             st.success(f" {name}, You Need (End semester): {targ} 📈")
             st.success("According  to rules, YOU Must Want 45+ to PASS 🍀")
             st.markdown("<h4 style='color:purple;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
+
+
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: url("https://picsum.photos/1200/800");
+        background-attachment: fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100%;
+        margin: 0;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+
 
