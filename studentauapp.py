@@ -47,11 +47,17 @@ def calc_academic_level(p, q, r, s, present, total):
         set2 = r + (s * 0.6)
         avg_marks = round((set1 + set2) / 2)
 
-    att_per = round((present / total) * 100)
-    return round((avg_marks + att_per) / 2)
+    if present<=total :
+        att_per = round((present / total) * 100)
+        return round((avg_marks + att_per) / 2)
+    else:
+        return "Invalid Input"
 
 def calc_attendance_percentage(present, total):
-    return round((present / total) * 100)
+    if present<=total :
+        return round((present / total) * 100)
+    else:
+        return "Invalid Input"
 
 def calc_internal_marks(p, q, r, s):
     set1 = p + (q * 0.6)
@@ -80,11 +86,48 @@ st.markdown("<p style='text-align:center;'>( Turn Mobile For Better Experience )
 
 name = st.text_input("👤 Enter your Name").capitalize()
 
+
+
 task = st.selectbox(
     "📌 Choose a Task",
     ["-- Tap To Select -- 👇🏻", "Calculate Academic Level 🏅", "Future Grade Prediction 🔮", "Calculate Attendance Percentage 📅", "Calculate Internal Marks 🎯","Achieve Target 🚀"]
 )
 
+help=st.button("Instructions to Use App")
+if help:
+    st.title("Welcome Dude !!!")
+    st.header("Instructions for Each Task below : ")
+
+    st.subheader(" 1) Calculate Academic Level ")
+    st.write(" * Enter Internal marks (?/40) of IAT exam and MODEL exam ")
+    st.write(" * Enter Exam Marks (?/100) of IAT exam and MODEL exam ")
+    st.write(" * If you didn't have MODEL exam marks just put 0")
+    st.write(" * Next Enter No.Of.Classes present and Total No.Of.Classes ")
+    st.write(" * Finally, Tap Calculate Button to see the Academic Level ")
+    st.subheader(" 2) Future Grade Prediction ")
+    st.write(" * Select Yes if you know your Academic level  And Enter it ")
+    st.write(" * Select No if you dont know your Academic Level ")
+    st.write(" * Similar Like Academic level Instruction ")
+    st.write(" * New one is Enter your Coaching Class marks (?/100) ")
+    st.write(" * Tap Predict Button to see the Predicted Grade in End Semester ")
+    st.subheader(" 3) Attendance Percentage ")
+    st.write(" * Enter Your No.Of.Classes Present ")
+    st.write(" * Enter Your Total No.Of.Classes ")
+    st.write(" * Tap Calculate Button to see the Attendance percentage ")
+    st.subheader(" 4) Internal Marks ")
+    st.write(" * Enter Internal marks (?/40) of IAT exam and MODEL exam ")
+    st.write(" * Enter Exam Marks (?/100) of IAT exam and MODEL exam ")
+    st.write(" * If you didn't have MODEL exam marks Just Put 0")
+    st.write(" * Tap Calculate button to see the Internal marks of IAT,MODEL,END SEMESTER exams ")
+    st.subheader(" 5) Achieve Target ")
+    st.write(" * Enter Your End Semester Internal Mark (?/40) ")
+    st.write(" * Select Your Target Grade like O,A+,A,B+,B,C .")
+    st.write(" * Tap Calculate Button to see the Needed Marks in End Semester Exam")
+    st.header("This app is very easy to use 👆🏻 ")
+
+    
+
+ 
 st.markdown("---")
 
 # Task: Academic Level
@@ -103,8 +146,11 @@ if task == "Calculate Academic Level 🏅":
 
     if st.button("✅ Calculate Academic Level"):
         academic_level = calc_academic_level(p, q, r, s, present, total)
-        st.success(f"🎯 {name}, Your Academic Level is: {academic_level}%")
-        st.markdown("<h4 style='color:#00FFFF;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
+        if academic_level=="Invalid Input":
+            st.subheader("Pls Enter the Correct Input ( Error: present>total )")
+        else:
+            st.success(f"🎯 {name}, Your Academic Level is: {academic_level}%")
+            st.markdown("<h4 style='color:#00FFFF;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
 
 # Task: Grade Prediction
 elif task == "Future Grade Prediction 🔮":
@@ -139,19 +185,22 @@ elif task == "Future Grade Prediction 🔮":
         present = st.number_input("📅 No. of Present Classes", min_value=0)
         total = st.number_input("📚 Total Classes", min_value=0)
 
-        st.markdown("### 🧪 Coaching Class Marks")
-        add = []
-        for i in range(1, 3):
-            coach = st.number_input(f"Phase {i} Coaching Marks /100", min_value=0, max_value=100, key=f"coachn_{i}")
-            add.append(coach)
+        if present>total :
+            st.subheader("Pls Enter the correct Input ( Error: present>total )")
+        else:
+            st.markdown("### 🧪 Coaching Class Marks")
+            add = []
+            for i in range(1, 3):
+                coach = st.number_input(f"Phase {i} Coaching Marks /100", min_value=0, max_value=100, key=f"coachn_{i}")
+                add.append(coach)
 
-        if st.button("🔍 Predict Grade"):
-            academic_level = calc_academic_level(p, q, r, s, present, total)
-            avg_coach = round(sum(add) / 2)
-            final_level = round((academic_level + avg_coach) / 2)
-            st.info(grade(final_level))
-            st.success(f"All the best, {name}! 🌟")
-            st.markdown("<h4 style='color:#00FFFF;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
+            if st.button("🔍 Predict Grade"):
+                academic_level = calc_academic_level(p, q, r, s, present, total)
+                avg_coach = round(sum(add) / 2)
+                final_level = round((academic_level + avg_coach) / 2)
+                st.info(grade(final_level))
+                st.success(f"All the best, {name}! 🌟")
+                st.markdown("<h4 style='color:#00FFFF;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
 
 # Task: Attendance
 elif task == "Calculate Attendance Percentage 📅":
@@ -161,8 +210,11 @@ elif task == "Calculate Attendance Percentage 📅":
 
     if st.button("📈 Calculate Attendance"):
         att_per = calc_attendance_percentage(present, total)
-        st.success(f"{name}, Your Attendance Percentage is: {att_per}% 🎯")
-        st.markdown("<h4 style='color:#00FFFF;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
+        if att_per=="Invalid Input":
+            st.subheader("Pls Enter the Correct Input ( Error: present>total )")
+        else:
+            st.success(f"{name}, Your Attendance Percentage is: {att_per}% 🎯")
+            st.markdown("<h4 style='color:#00FFFF;'>Thanks for using the Student Helper App! 💫</h4>", unsafe_allow_html=True)
 
 # Task: Internal Marks
 elif task == "Calculate Internal Marks 🎯":
@@ -214,7 +266,6 @@ page_bg = f"""
 """
 
 st.markdown(page_bg, unsafe_allow_html=True)
-
 
 
 
